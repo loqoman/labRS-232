@@ -10,6 +10,8 @@
 
 
 void main() {
+    // Opening the serial file
+    // the 'serial_port' varible is a file descriptor (really just an int)
     int serial_port = open("/dev/ttyUSB0", O_RDWR);
 
     // Check for errors
@@ -18,6 +20,8 @@ void main() {
     }
 
     // Create new termios struc, we call it 'tty' for convention
+    // termios is a "general terminal interface that is
+    //               provided to control asynchronous communications ports"
     struct termios tty;
     memset(&tty, 0, sizeof tty);
 
