@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "libserialport.h": "c"
+    },
+    "python.pythonPath": "/usr/bin/python"
+}
