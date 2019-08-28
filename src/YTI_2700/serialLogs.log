@@ -1,0 +1,121 @@
+===================== 08/17 11:25:08 INFO  : Started serialBlocking.py =====================
+08/17 11:25:11 INFO  : Recieved an input buffer of 67
+08/17 11:25:11 INFO  : Parsed an ID of:   120
+08/17 11:25:11 INFO  : Parsed a measurment of: :  329 
+08/17 11:25:11 INFO  : Parsed a units of: mOsm
+08/17 11:25:15 INFO  : Recieved an input buffer of 67
+08/17 11:25:15 INFO  : Parsed an ID of:   119
+08/17 11:25:15 INFO  : Parsed a measurment of: :  336 
+08/17 11:25:15 INFO  : Parsed a units of: mOsm
+===================== 08/17 11:25:18 INFO  : Started serialBlocking.py =====================
+08/17 11:25:20 INFO  : Recieved an input buffer of 67
+08/17 11:25:20 INFO  : Parsed an ID of:   118
+08/17 11:25:20 INFO  : Parsed a measurment of: :  348 
+08/17 11:25:20 INFO  : Parsed a units of: mOsm
+08/17 11:25:25 INFO  : Recieved an input buffer of 67
+08/17 11:25:25 INFO  : Parsed an ID of:   117
+08/17 11:25:25 INFO  : Parsed a measurment of: :  352 
+08/17 11:25:25 INFO  : Parsed a units of: mOsm
+08/17 11:25:29 INFO  : Recieved an input buffer of 67
+08/17 11:25:29 INFO  : Parsed an ID of:   116
+08/17 11:25:29 INFO  : Parsed a measurment of: :  335 
+08/17 11:25:29 INFO  : Parsed a units of: mOsm
+08/17 11:25:34 INFO  : Recieved an input buffer of 67
+08/17 11:25:34 INFO  : Parsed an ID of:   115
+08/17 11:25:34 INFO  : Parsed a measurment of: :  325 
+08/17 11:25:34 INFO  : Parsed a units of: mOsm
+08/17 11:25:38 INFO  : Recieved an input buffer of 67
+08/17 11:25:38 INFO  : Parsed an ID of:   114
+08/17 11:25:38 INFO  : Parsed a measurment of: :  379 
+08/17 11:25:38 INFO  : Parsed a units of: mOsm
+08/17 11:25:43 INFO  : Recieved an input buffer of 67
+08/17 11:25:43 INFO  : Parsed an ID of:   113
+08/17 11:25:43 INFO  : Parsed a measurment of: :  336 
+08/17 11:25:43 INFO  : Parsed a units of: mOsm
+===================== 08/17 11:25:51 INFO  : Started serialBlocking.py =====================
+08/17 11:25:52 INFO  : Recieved an input buffer of 134
+08/17 11:25:52 INFO  : Parsed an ID of:   112
+08/17 11:25:52 INFO  : Parsed a measurment of: :  337 
+08/17 11:25:52 INFO  : Parsed a units of: mOsm
+===================== 08/17 11:25:58 INFO  : Started serialBlocking.py =====================
+08/17 11:27:34 INFO  : Recieved an input buffer of 67
+08/17 11:27:34 INFO  : Parsed an ID of:   110
+08/17 11:27:34 INFO  : Parsed a measurment of: :  352 
+08/17 11:27:34 INFO  : Parsed a units of: mOsm
+08/17 11:27:38 INFO  : Recieved an input buffer of 67
+08/17 11:27:38 INFO  : Parsed an ID of:   109
+08/17 11:27:38 INFO  : Parsed a measurment of: :  354 
+08/17 11:27:38 INFO  : Parsed a units of: mOsm
+08/17 11:27:43 INFO  : Recieved an input buffer of 67
+08/17 11:27:43 INFO  : Parsed an ID of:   108
+08/17 11:27:43 INFO  : Parsed a measurment of: :  297 
+08/17 11:27:43 INFO  : Parsed a units of: mOsm
+08/17 11:33:16 INFO  : Started serialBlocking.py
+08/17 11:33:17 INFO  : Recieved an input buffer of 0
+===================== 08/17 11:33:28 INFO  : Started serialBlocking.py =====================
+08/17 11:33:29 INFO  : Recieved an input buffer of 0
+08/17 11:33:29 INFO  : Parsed a message of: 
+08/17 11:33:29 INFO  : Recieved an input buffer of 0
+...
+08/17 11:35:02 INFO  : Recieved an input buffer of 0
+08/17 11:35:02 INFO  : Parsed a message of: 
+08/17 11:35:03 INFO  : Recieved an input buffer of 0
+08/17 11:35:03 INFO  : Parsed a message of: 
+08/17 11:35:03 INFO  : Recieved an input buffer of 15
+08/17 11:35:03 INFO  : Parsed a message of:  1:  288 ID: 
+
+08/17 11:35:04 INFO  : Recieved an input buffer of 0
+08/17 11:35:04 INFO  : Parsed a message of: 
+08/17 11:35:04 INFO  : Recieved an input buffer of 0
+...
+08/17 11:36:43 INFO  : Recieved an input buffer of 0
+08/17 11:36:43 INFO  : Parsed a message of: 
+08/17 11:36:43 INFO  : Recieved an input buffer of 0
+08/17 11:36:43 INFO  : Parsed a message of: 
+08/17 11:36:44 INFO  : Recieved an input buffer of 15
+08/17 11:36:44 INFO  : Parsed a message of:  2:  291 ID: 
+
+08/17 11:36:44 INFO  : Recieved an input buffer of 0
+08/17 11:36:44 INFO  : Parsed a message of: 
+...
+08/17 11:38:23 INFO  : Recieved an input buffer of 0
+08/17 11:38:23 INFO  : Parsed a message of: 
+08/17 11:38:23 INFO  : Recieved an input buffer of 15
+08/17 11:38:23 INFO  : Parsed a message of:  3:  290 ID: 
+
+08/17 11:38:24 INFO  : Recieved an input buffer of 0
+08/17 11:38:24 INFO  : Parsed a message of: 
+...
+08/17 11:39:05 INFO  : Parsed a message of: 
+08/17 11:39:05 INFO  : Recieved an input buffer of 0
+08/17 11:39:05 INFO  : Parsed a message of: 
+08/17 11:39:06 INFO  : Started serialBlocking.py
+08/17 11:40:06 INFO  : Recieved an input buffer of 15
+08/17 11:40:06 INFO  : Parsed a message of:  4:  289 ID: 
+
+08/17 11:41:47 INFO  : Recieved an input buffer of 15
+08/17 11:41:47 INFO  : Parsed a message of:  5:  297 ID: 
+
+08/17 11:43:29 INFO  : Recieved an input buffer of 15
+08/17 11:43:29 INFO  : Parsed a message of:  6:  292 ID: 
+
+08/17 11:45:10 INFO  : Recieved an input buffer of 15
+08/17 11:45:10 INFO  : Parsed a message of:  7:  287 ID: 
+
+08/17 11:46:49 INFO  : Recieved an input buffer of 15
+08/17 11:46:49 INFO  : Parsed a message of:  8:  289 ID: 
+
+08/17 11:48:33 INFO  : Recieved an input buffer of 15
+08/17 11:48:33 INFO  : Parsed a message of:  9:  289 ID: 
+
+08/17 11:50:15 INFO  : Recieved an input buffer of 15
+08/17 11:50:15 INFO  : Parsed a message of: 10:  292 ID: 
+
+08/17 11:50:46 INFO  : Recieved an input buffer of 60
+08/17 11:50:46 INFO  : Parsed a message of: ================================Tray Complete           
+
+08/17 12:15:08 INFO  : Started serialBlocking.py
+08/17 12:15:38 INFO  : Recieved an input buffer of 111
+08/17 12:15:38 INFO  : Parsed a message of: 0d0a0d0a4f70657261746f722049443a205f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f0d0a534e3a203035303330333236410d0a30382f31372f323031392031313a35323a303920414d0d0a3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d0d0a
+08/17 12:17:05 INFO  : Recieved an input buffer of 15
+08/17 12:17:05 INFO  : Parsed a message of: 20313a20203239332049443a200d0a
