@@ -41,14 +41,23 @@ class OSMO2020Manager(object):
         logging.info("A OSMO 2020 Manager was created with SN: " + self.SN + " and Port: " + self.port)
 
     def parseRecallData(self):
-        # Reads the data in the proper known format
-        # This method assumes that the next 67 bytes of the input buffer are a 'recall data' message 
+        # Reads the data from serial input buffer in 'recall data' format
+        # TODO: No hex dump for this input
+        ID = self.serialObj.read(5)
+        ID = ID.encode('ascii')
         
-        pass
+        measurement = self.serialObj.read(7)
+        measurement = measurement.encode('ascii')
+
+        units = self.serialObj.read(4)
+        units = units.encode('ascii')
+
+        return {'IDNum':ID, 'measurement':measurement, 'units':units}
 
     def parseResultReportData(self):
-        # Reads data from serial input buffer
+        # Reads data from serial input buffer in 'result reporting' format
         # This method assumes that the next 15 bytes of the input buffer are a 'recall data' message 
+        
         # Gives you ASCII: <space><well(ex:1)>:
         well = self.serialObj.read(3) 
         well = well.encode('ascii')
@@ -69,6 +78,7 @@ class OSMO2020Manager(object):
     def blockForInput(self, byteTimeout = 100):
         logging.warning("Osmo manager with SN " + SN + " is blocking waiting for " + str(byteTimeout) + "bytes.")
         # By deafult wait for 100 bytes
+        pass
 
     def blockSelfIdentify(self):
         logging.warning("An osmo manager is blocking, waiting for self-initialization")
