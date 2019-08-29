@@ -116,6 +116,8 @@
 
 08/17 12:15:08 INFO  : Started serialBlocking.py
 08/17 12:15:38 INFO  : Recieved an input buffer of 111
-08/17 12:15:38 INFO  : Parsed a message of: 0d0a0d0a4f70657261746f722049443a205f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f0d0a534e3a203035303330333236410d0a30382f31372f323031392031313a35323a303920414d0d0a3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d0d0a
+----- Below is on startup???? ----- 
+08/17 12:15:38 INFO  : Parsed a [hex] message of: 0d0a0d0a4f70657261746f722049443a205f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f5f0d0a534e3a203035303330333236410d0a30382f31372f323031392031313a35323a303920414d0d0a3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d0d0a ('\r\n\r\nOperator ID: ___________________\r\nSN: 05030326A\r\n08/17/2019 11:52:09 AM\r\n================================\r\n')
 08/17 12:17:05 INFO  : Recieved an input buffer of 15
-08/17 12:17:05 INFO  : Parsed a message of: 20313a20203239332049443a200d0a
+----- Result Reporting Hex dump -----
+08/17 12:17:05 INFO  : Parsed a [hex] message of: 20313a20203239332049443a200d0a (' 1:  293 ID: \r\n')
