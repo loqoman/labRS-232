@@ -2,7 +2,7 @@
 import logging
 hardwareManager = None
 
-class hardwareManager(object):
+class HardwareManager(object):
 
     # Called when a hardware manager is created
     def __init__(self):
@@ -106,6 +106,6 @@ class hardwareManager(object):
         self.insturmentManagers.append(insturmentManager)
         
 
-            
+    def assoicateDataForResult(self, insturmentManager):
 
 

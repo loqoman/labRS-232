@@ -3,6 +3,7 @@ import logging
 import hardwareManager
 import serial
 import threading
+import time
 
 # This is a trimmed down version of a basic Instument manager
 # Nb: timeout for Serial object only affects the behaivor read()
@@ -52,6 +53,7 @@ class OSMO2020Manager(object):
         units = self.serialObj.read(4)
         units = units.encode('ascii')
 
+        # TODO: Convert  ID and measurement into int objects
         return {'IDNum':ID, 'measurement':measurement, 'units':units}
 
     def parseResultReportData(self):
@@ -76,9 +78,14 @@ class OSMO2020Manager(object):
         return {'wellNum': well, 'measurement': measurment, 'IDNum': ID}
 
     def blockForInput(self, byteTimeout = 100):
-        logging.warning("Osmo manager with SN " + SN + " is blocking waiting for " + str(byteTimeout) + "bytes.")
+        logging.notice("Osmo manager with SN " + SN + " is blocking waiting for " + str(byteTimeout) + "bytes.")
         # By deafult wait for 100 bytes
-        pass
+        while self.serialObj.in_waiting() < byteTimeout:
+            logging.warning("Waiting for input...")
+            time.sleep(5)
+            
+        out = self.serialObj.read(byteTimeout)
+        return out
 
     def blockSelfIdentify(self):
         logging.warning("An osmo manager is blocking, waiting for self-initialization")

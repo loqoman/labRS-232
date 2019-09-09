@@ -29,6 +29,17 @@ Paramaters / Varibles assoicated with a `result` object
 * Timestamp of request
 * Coprresponding Insturment (OSMO vs. YSI)
 * Insturment SN (Nb: In the future 'Coprresponding Insturment' and 'Instrument SN' could be combined)
+* Have a default value in case of error [**UNWRITTEN**] 
+
+
+- Recieveing data is (arguibly) the hardest thing to design in `result.py`. There are many different theoretical methods for how/when a user would want data received, and it is nessissary to design a system that prepaired for all of them.
+
+Methods For Receiving Data
+* Wait until a time [**UNWRITTEN**]
+* Assume it is in input buffer, and read it directly [**UNWRITTEN**]
+* Wait until the input buffer is the proper size, then read it out [**UNWRITTEN**]
+
+
 
 ### **`hardwareManager.py`**
 
@@ -54,7 +65,7 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 * A method to parse data in the input buffer in 'recall data' format
 * A method to parse data in the input buffer in 'result reporting' format
 * A method to block for N bytes of data
-* A method to block for self-identify [**UNWRITTEN**]
+* A method to block for self-identify (I.E Determine what message was sent based on only the message) [**UNWRITTEN**]
 * A method to decode a passed message [**UNWRITTEN**]
 
 
