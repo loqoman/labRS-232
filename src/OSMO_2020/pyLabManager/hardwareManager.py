@@ -106,6 +106,6 @@ class HardwareManager(object):
         self.insturmentManagers.append(insturmentManager)
         
 
-    def assoicateDataForResult(self, insturmentManager):
-
-
+    def assoicateDataForResult(self, result, insturmentManager):
+        # Unwritten
+        pass
