@@ -123,6 +123,7 @@
 08/17 12:17:05 INFO  : Parsed a [hex] message of: 20313a20203239332049443a200d0a (' 1:  293 ID: \r\n')
 09/21 10:43:02 INFO  : Started serialBlocking.py
 --- Result reporting new test ----
+================================= START OF 9/21 TESTS
 09/21 10:43:12 INFO  : Recieved an input buffer of 19
 09/21 10:43:12 INFO  : Parsed a message of: 312e20526563616c6c20526573756c74730d0a
 09/21 10:43:12 INFO  : Recieved an input buffer of 106
