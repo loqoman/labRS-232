@@ -6,11 +6,11 @@ labManager is an independent, open-source scalabale lab managment software, buil
 
 * *Operator ID* - Lab insturments post a value labeled 'Operator ID' when communicating a result or recalling result. There is a potential this field can be used to further improve automation.
 * *Two-Way Communication* - Unfortunatly, all communication between insturments is currently one way. A user initilizes the sample, then software handles the reception of the data. In multiple intrument manuals, there is mention of two-way communication, however this functionality has not been tested.
-* *Enumerating OSMO Communcation Cases* - Not all possible messages have been recorded and identified for the OSMO 2020. Thus, there are many holes in `OSMO2020Manager.py`, corresponding to the unknowns. Bolded scenarios have been tested.
-    * Power on
-    * Save configuration
-    * **Recall Results**
-    * **Report Results**
+* ~~*Enumerating OSMO Communcation Cases* - Not all possible messages have been recorded and identified for the OSMO 2020. Thus, there are many holes in `OSMO2020Manager.py`, corresponding to the unknowns.~~
+    * ~~Power on~~
+    * ~~Save configuration~~
+    * ~~Recall Results~~
+    * ~~Report Results~~
 
 ## Documentation
 
@@ -68,7 +68,35 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 * A method to block for self-identify (I.E Determine what message was sent based on only the message) [**UNWRITTEN**]
 * A method to decode a passed message [**UNWRITTEN**]
 
-
 ## Implementation
 
 ### **`main.py`**
+
+## OSMO 2020 Serial Command Structure
+
+The theory was, if enough log files were collected and analyzed carefully enough, you could get a good idea of what the command structure was, even without a users manuel. Thus, a **majoiry** of the commands and their respective byte patterns have been found. 
+
+### Recall Results
+  * Header : 19 Bytes
+    * `“1.<space>Recall Results\r\n”`
+  * Table Header : 116 Bytes
+    * `“  #    Result       ID                   Date/Time  \r\n  ==========================================================\r\n”`
+    * Need to come back to this to double check newline characters + spaces
+    * 116 Bytes is an estimate from stitching together tests
+  * Results : 65 Bytes
+    * `"<space*2>199:  287 mOsm/kg                      09/21/2019 09:36:14 AM\r\n"`
+    * For the record, we know for a fact the results are appended every 65 bytes, we don’t know for sure how often the heading is
+### Result Reporting (Doing a real test)
+  * Header : 111 Bytes
+      `Operator ID: ___________________
+      SN: 05030326A
+      09/21/2019 10:32:33 AM
+      ================================\r\n”`
+  * Result : 15 Bytes
+    * `"6:  303 ID: \r\n”`
+  * Footer : 60 Bytes 
+    * `"================================\r\nTray Complete<space*11>\r\n""` 
+    * Need to double check - Spaces at the end were manually counted from hex
+### Statistics
+
+TODO: Finish the remainder of the commands
