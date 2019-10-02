@@ -15,7 +15,7 @@ import result
 
 class OSMO2020Manager(object):
 
-    def __init__(self, port, autoInit = False, SN, model):
+    def __init__(self, port, autoInit = False, SN = 0 , model = None):
         # XXX: Assert baud is 9600
         # Creating memeber varibles
         self.port = port
@@ -73,7 +73,7 @@ class OSMO2020Manager(object):
         # TODO: The 'measurement' field here is untested, when the hex dump was
         #       recorded, the field was empty. I *think* this byte-pattern is correct.
         # Gives you ASCII <space><'I'><'D'><':'><ID>
-        ID = ser.read(5)
+        ID = self.serialObj.read(5)
         ID = ID.encode('ascii')
         
         return result.Result(units = "milliOSMO", value = measurment, ID = ID, well = well)

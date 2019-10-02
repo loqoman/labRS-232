@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.INFO,
 
 logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
 
-logging.info("Started serialBlocking.py")
+logging.info("*------* Started serialBlocking.py *------* ")
 # Main loop
 
 
@@ -68,7 +68,7 @@ def parseSpew(inBufSize):
 
 while True:
     # Sleep
-    time.sleep(.5)
+    time.sleep(2)
     # Clear the output string
     out = ''
 
@@ -77,13 +77,14 @@ while True:
         
         logging.info("Recieved an input buffer of {}".format(ser.inWaiting()))
 
-        message = parseSpew(ser.inWaiting())
-        print(type(message))
+        message = parseSpew(ser.in_waiting)
         '''
         ID,measurment, units = parseRecallData(ser.inWaiting())
         logging.info("Parsed an ID of: {}".format(ID))
         logging.info("Parsed a measurment of: {}".format(measurment))
         logging.info("Parsed a units of: {}".format(units))
         '''
-        logging.info("Parsed a message of: {}".format(message.encode('hex')))
+        logging.info("Parsed a message(hex) of: {}".format(message.encode('hex')))
+        logging.info("Parsed a message(normal) of: {}".format(message))
+
 

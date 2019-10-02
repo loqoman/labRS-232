@@ -1,0 +1,32 @@
+09/21 11:51:53 INFO  : *------* Started main.py *------* 
+09/21 11:51:53 INFO  : Assigning a new global hardwareManager
+09/21 11:51:53 INFO  : A OSMO 2020 Manager was created with SN: 05030326A and Port: /dev/ttyUSB0
+09/21 11:51:53 INFO  : Attempting to register an insturment with an unknown model
+09/21 11:51:57 INFO  : Unrecgognised Input, Please type 'Y' or 'N'
+09/21 11:51:58 WARNING: Registering an unknown model of: OMSO_2020
+09/21 11:51:58 INFO  : Attempting to register an insturment with an unknown Serial number
+09/21 11:52:02 WARNING: Registering an unknown SN of: 05030326A
+09/21 11:52:56 INFO  : *------* Started main.py *------* 
+09/21 11:52:56 INFO  : Assigning a new global hardwareManager
+09/21 11:52:56 INFO  : A OSMO 2020 Manager was created with SN: 05030326A and Port: /dev/ttyUSB0
+09/21 11:52:56 INFO  : Attempting to register an insturment with an unknown model
+09/21 11:52:57 WARNING: Registering an unknown model of: OMSO_2020
+09/21 11:52:57 INFO  : Attempting to register an insturment with an unknown Serial number
+09/21 11:52:58 WARNING: Registering an unknown SN of: 05030326A
+09/21 11:53:08 INFO  : Printing some facts about the rest object returned
+09/21 11:53:08 INFO  : Value: 95:  
+09/21 11:53:08 INFO  : Units: 
+09/21 11:53:08 INFO  : Well:   1
+09/21 11:53:08 INFO  : ID: 287 m
+09/21 11:54:24 INFO  : *------* Started main.py *------* 
+09/21 11:54:24 INFO  : Assigning a new global hardwareManager
+09/21 11:54:24 INFO  : A OSMO 2020 Manager was created with SN: 05030326A and Port: /dev/ttyUSB0
+09/21 11:54:24 INFO  : Attempting to register an insturment with an unknown model
+09/21 11:55:24 WARNING: Registering an unknown model of: OMSO_2020
+09/21 11:55:24 INFO  : Attempting to register an insturment with an unknown Serial number
+09/21 11:55:28 WARNING: Registering an unknown SN of: 05030326A
+09/21 11:55:58 INFO  : Printing some facts about the result object returned
+09/21 11:55:58 INFO  : Value: 90:  
+09/21 11:55:58 INFO  : Units: 
+09/21 11:55:58 INFO  : Well:   1
+09/21 11:55:58 INFO  : ID: 321 m

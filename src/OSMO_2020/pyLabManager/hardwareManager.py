@@ -23,10 +23,10 @@ class HardwareManager(object):
         
         # Assigning the single hardwareManager
         if hardwareManager is None:
-            logging.notice("Assigning a new global hardwareManager")
+            logging.info("Assigning a new global hardwareManager")
             hardwareManager = self
         else:
-            logigng.warning("Overriding the old hardwareManager")
+            logging.warning("Overriding the old hardwareManager")
             hardwareManager = self
 
     # Find all insturments matching a model(OMSO_2020, ect.)
@@ -52,7 +52,7 @@ class HardwareManager(object):
     def registerInsturmentManager(self, insturmentManager):
         
         insturmentSN = insturmentManager.SN
-        insturmentModel = insturmentManager.Model
+        insturmentModel = insturmentManager.model
 
         # TODO: Wire both of these in with configs.
         #       (Whenever an unknown insturment is registered, write it to a file, and populate the known* lists)
@@ -63,14 +63,14 @@ class HardwareManager(object):
             # Safty measures, to prevent unwanted access to a new (potentially expensive) device.
             # Human language!
             while True:
-                continue = input("Proceed? (Y/N)")
+                continueStr = raw_input("Proceed? (Y/N)")
 
-                logging.debug("Passed an input of: " + continue)
-                if continue = 'Y':
+                logging.debug("Passed an input of: " + continueStr)
+                if continueStr == 'Y':
                     # Get out of the loop
                     break
 
-                elif continue = 'N':
+                elif continueStr == 'N':
                     logging.notice("Exiting register method")
                     # Break out of full method
                     return False
@@ -85,14 +85,14 @@ class HardwareManager(object):
             # Safty measures, to prevent unwanted access to a new (potentially expensive) device.
             # Human language!
             while True:
-                continue = input("Proceed? (Y/N)")
+                continueStr = raw_input("Proceed? (Y/N)")
 
-                logging.debug("Passed an input of: " + continue)
-                if continue = 'Y':
+                logging.debug("Passed an input of: " + continueStr)
+                if continueStr == 'Y':
                     # Get out of the loop
                     break
 
-                elif continue = 'N':
+                elif continueStr == 'N':
                     logging.notice("Exiting register method")
                     # Break out of full method
                     return False

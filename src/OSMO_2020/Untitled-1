@@ -1,0 +1,30 @@
+OsmoMedia = osmo2020Manager(SN = 3000,port = 2)
+OsmoBio = osmo2020Manger(SN = 2000, port = 1)
+
+
+
+Notes:
+    - *Next sample* vs. *Last sample
+    - Dropping Bytes?
+    - 5-10 seconds
+
+Today
+    - Every Byte Frame
+        - 'Recall Data'
+        - 'Result Reporting Data'
+        - 'Diagnostics'
+        - 'Any Others?' 
+        - OPC
+
+Phuso-code
+    - input_buffer is?
+    - input_buffer is?
+    - input_buffer is?
+        - Check they are all equal
+        - if = 15, we know the message
+
+
+
+Data recorded Thus far
+    - Multiple Data frames for 'Result Reporting'
+    - 'Test' Data Frame
