@@ -2,12 +2,13 @@
 
 ## Introduction
 
-labManager is an independent, open-source scalabale lab managment software, built around RS-232 communication with industry-standard equipment. Development is currently in progress for Just Biotherapudic to be used for automation.
+labManager is an independent, open-source scalabale lab managment software, built around RS-232 communication with industry-standard equipment. Development is currently in progress for Just Biotherapudic to be used for lab automation.
 
 ### Unknowns / Further Research
 
 * *Operator ID* - Lab insturments post a value labeled 'Operator ID' when communicating a result or recalling result. There is a potential this field can be used to further improve automation.
-* *Two-Way Communication* - Unfortunatly, all communication between insturments is currently one way. A user initilizes the sample, then software handles the reception of the data. In multiple intrument manuals, there is mention of two-way communication, however this functionality has not been tested.
+* *Two-Way Communication* - Unfortunatly, all communication between the OSMO 2020 is currently one way. A user initilizes the sample, then software handles the reception of the data. In multiple intrument manuals, there is mention of two-way communication, however this functionality has not been tested.
+* *Threading Data Flow* - As the niche of this software beccomes further enumerated, the potential need for threading arises, and could potentially be explored as another avenue. It is unclear weather or not threading is nessissary at this time.
 * ~~*Enumerating OSMO Communcation Cases* - Not all possible messages have been recorded and identified for the OSMO 2020. Thus, there are many holes in `OSMO2020Manager.py`, corresponding to the unknowns.~~
     * ~~Power on~~
     * ~~Save configuration~~
@@ -22,7 +23,7 @@ Description
 
 - This file outlines the Result object. Results bridge the hardware manager to a human-friendly medium. Results are created by request through Ignition. On creatation a sample ID is assoiced with the object, a data condition is set, desired insturment is specified. (Nb: Each individual insturment has a unique serial number. If needed, the serial can be assoiced with a human-friendly designation, for example, OSMO 1 or OSMO 2.)
 
-- Results are designed to be customizible, with the assumtion that in practice multiple lab insturments of the same model will be active, and there is a potential for conflict within users.
+- Results are designed to be customizible, with the assumtion that in practice multiple lab insturments of the same model will be active, and the same `result` object will be useable for the output of every instuement.
 
 Paramaters / Varibles assoicated with a `result` object
 * Sample ID (In the format S-2019MM/DD[?])
@@ -98,7 +99,7 @@ The theory was, if enough log files were collected and analyzed carefully enough
       ================================\r\n”`
       * Note: This section is sent as 4 seperate messages, each terminated by a `\r\n` character.  
   * Result : 15 Bytes
-    * `"6:  303 ID: \r\n”`
+    * `" 6:  303 ID: \r\n”`
   * Footer : 60 Bytes 
     * `"================================\r\nTray Complete<space*11>\r\n""` 
     * Need to double check - Spaces at the end were manually counted from hex
