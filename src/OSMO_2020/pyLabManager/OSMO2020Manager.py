@@ -31,12 +31,9 @@ class OSMO2020Manager(object):
             bytesize=serial.EIGHTBITS       # ^
         )
 
-        # TODO: Where auto-init functionality would be written in
-        if autoInit:
-            pass
-        else:
-            self.SN = SN
-            self.model = model
+
+        self.SN = SN
+        self.model = model
 
         # Clear anything that may have been in the input buffer
         self.serialObj.reset_input_buffer()
@@ -44,53 +41,89 @@ class OSMO2020Manager(object):
         logging.info("A OSMO 2020 Manager was created with SN: " + self.SN + " and Port: " + self.port)
 
     def parseRecallData(self):
-        # Reads the data from serial input buffer in 'recall data' format
-        # TODO: No hex dump for this input
-        ID = self.serialObj.read(5)
-        ID = ID.encode('ascii')
+        # Return a dictionary of values
+        # Parse data when we know we are receiving a 'Recall Data' message
+        # We assume the header has already been read out of the input buffer to be identified (the hard part)
+        # Trash a space
+        readings = []
+
+        # TODO: Double check this header size is correct
+        self.serialObj.read(116)
+
+        # Assuming a result is in the input buffer
+        # This could also be sanity checked to make sure it is 65 bytes wide
+        self.serialObj.read(2)
+
+        ID = self.serialObj.read(3)
+        ID = int(ID.encode('ascii'))
+
+        self.serialObj.read(2)
+        reading = self.serialObj.read(3)
+        reading = int(reading.encode('ascii'))
+
+        self.serialObj.read(30)
+        date = self.serialObj.read(10)
+        # At the end of the day, the date will always be read by a human. No need to int()
+        date = date.encode('ascii')
+
+        self.serialObj.read(1)
+        time = self.serialObj.read(11)
+        time = time.encode('ascii')
+
+        # XXX: PROBLEM WITH MID MESSAGE
+        #   We don't know how many wells are going to be done in this single command.
+        #   we know when we are done, because we will receieve a footer.
+        #   RIGHT HERE in software is where the logic to identify the next command's size is going to be.
+        #   If the size = 65, do another reading
+        #   If we don't get another message in the input buffer, assume we have exited
+
+        readings.append({'IDNum':ID, 'reading':reading, 'date':date,'time':time})
         
-        measurement = self.serialObj.read(7)
-        measurement = measurement.encode('ascii')
-
-        units = self.serialObj.read(4)
-        units = units.encode('ascii')
-
-        # TODO: Convert  ID and measurement into int objects
-        return {'IDNum':ID, 'measurement':measurement, 'units':units}
-
+        return readings
     def parseResultReportData(self):
-        # Reads data from serial input buffer in 'result reporting' format
-        # This method assumes that the next 15 bytes of the input buffer are a 'recall data' message 
-        
-        # Gives you ASCII: <space><well(ex:1)>:
-        well = self.serialObj.read(3) 
+        # Return a dictionary of values
+        # Parse data when we know we are receiving a 'Result Reporting' message
+        # We assume the header has already been read out of the input buffer to be identified (the hard part)
+        readings = []
+        # Trash a space
+        self.serialObj.read(1)
+
+        well = self.serialObj.read(1)
         well = well.encode('ascii')
+        well = int(well)
+        # Trash some junk in the message
+        self.serialObj.read(3)
 
-        # Gives you ASCII: <space><space><measurement(ex: 293)>
-        measurment = self.serialObj.read(5) 
-        measurment = measurment.encode('ascii')
+        # Get the measurement
+        measurement = self.serialObj.read(3)
+        measurement = measurement.encode('ascii')
+        measurement = int(measurement)
 
-        # TODO: The 'measurement' field here is untested, when the hex dump was
-        #       recorded, the field was empty. I *think* this byte-pattern is correct.
-        # Gives you ASCII <space><'I'><'D'><':'><ID>
-        ID = self.serialObj.read(5)
+        self.serialObj.read(4)
+        # TODO: What happens if an ID is supplied? Where is it put?
+        ID = self.serialObj.read(1)
         ID = ID.encode('ascii')
-        
-        return result.Result(units = "milliOSMO", value = measurment, ID = ID, well = well)
+        ID = int(ID)
+
+        # XXX: PROBLEM WITH MID MESSAGE
+        #   We don't know how many wells are going to be done in this single command.
+        #   we know when we are done, because we will receieve a footer.
+        #   RIGHT HERE in software is where the logic to identify the next command's size is going to be.
+        #   If the size = 15, do another reading
+        #   If the size = 60, stop the reading and return all the messages
+
+        readings.append({'IDNum':ID, 'measurement':measurement, 'well':well})
+        return readings
 
     def blockForInput(self, byteTimeout = 100):
         logging.notice("Osmo manager with SN " + SN + " is blocking waiting for " + str(byteTimeout) + "bytes.")
         # By deafult wait for 100 bytes
-        while self.serialObj.in_waiting() < byteTimeout:
+        while self.getInputBuffer() < byteTimeout:
             logging.warning("Waiting for input...")
             time.sleep(5)
             
         out = self.serialObj.read(byteTimeout)
         return out
-
-    def blockSelfIdentify(self):
-        logging.warning("An osmo manager is blocking, waiting for self-initialization")
-        pass
 
     def getInputBuffer(self):
         inputBufferSize = self.serialObj.in_waiting()

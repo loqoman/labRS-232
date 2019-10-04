@@ -57,4 +57,13 @@ if __name__ == "__main__":
     logging.info("Units: " + str(testResult.units))
     logging.info("Well: " + str(testResult.well))
     logging.info("ID: " + str(testResult.ID))
+
+
+'''
+Psudo-code for blocking design:
+
+    
+
+
+'''
             
