@@ -78,7 +78,7 @@ The theory was, if enough log files were collected and analyzed carefully enough
 
 ### Recall Results
   * Header : 19 Bytes
-    * `“1.<space>Recall Results\r\n”`
+    * `“1. Recall Results\r\n”`
   * Table Header : 116 Bytes
     * `“  #    Result       ID                   Date/Time  \r\n  ==========================================================\r\n”`
     * Need to come back to this to double check newline characters + spaces
@@ -88,15 +88,46 @@ The theory was, if enough log files were collected and analyzed carefully enough
     * For the record, we know for a fact the results are appended every 65 bytes, we don’t know for sure how often the heading is
 ### Result Reporting (Doing a real test)
   * Header : 111 Bytes
-      `Operator ID: ___________________
+      * `Operator ID: ___________________
       SN: 05030326A
       09/21/2019 10:32:33 AM
       ================================\r\n”`
+      * Note: This section is sent as 4 seperate messages, each terminated by a `\r\n` character.  
   * Result : 15 Bytes
     * `"6:  303 ID: \r\n”`
   * Footer : 60 Bytes 
     * `"================================\r\nTray Complete<space*11>\r\n""` 
     * Need to double check - Spaces at the end were manually counted from hex
 ### Statistics
+  * Header : 15 Bytes
+    * `“2. Statistics\r\n”`
+  * Data Range : 26 Bytes
+    * `“Start: 171  Stop: 200<space*3>\r\n”`
+    * Spaces hand counted
+  * Average : 25 Bytes
+    * `“Average = 304.9 mOsm/kg\r\n”`
+  * Standard Deviation : 24 Bytes
+    * `“Std Dev = 22.5 mOsm/kg\r\n”`
+  * Coefficient of variation : 12 Bytes
+    * `“CV = 7.39%\r\n”` 
+    * Note: Stitched toegether from two sepearet log messages
+### Event Record
+  * Header : 18 Bytes
+    * `"3. Event Record\r\n”`
+  * Note: This message will probabbly never be sent over, but it seems to be a large spew of recorded events
+### Barcode Test
+  * Header : 26 Bytes
+    * `“6. Barcode Test<space*9>\r\n”`
+  * Note: This message is unfinished. It is one of the few messages where the logs were cut off
+### Assistance
+  * Header : 37 Bytes
+    * `“4. Assistance\r\nAdvanced Instruments\r\n”`
+  * Road : 20 Bytes
+    * `“Two Technology Way\r\n”`
+  * City and State : 20 Bytes
+    * `“Norwood, MA  02062\r\n”`
+  * Telephone : 31 Bytes
+    
+
 
 TODO: Finish the remainder of the commands
