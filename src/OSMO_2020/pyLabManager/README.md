@@ -1,3 +1,5 @@
+# pyLabManager
+
 ## Introduction
 
 labManager is an independent, open-source scalabale lab managment software, built around RS-232 communication with industry-standard equipment. Development is currently in progress for Just Biotherapudic to be used for automation.
@@ -65,7 +67,8 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 * A method to parse data in the input buffer in 'recall data' format
 * A method to parse data in the input buffer in 'result reporting' format
 * A method to block for N bytes of data
-* A method to block for self-identify (I.E Determine what message was sent based on only the message) [**UNWRITTEN**]
+* ~~A method to block for self-identify (I.E Determine what message was sent based on only the message) [**UNWRITTEN**]~~
+  * The self-identify feature was ruled unnessissary after getting a better idea of the commands. There are only ~2 commands that give the serial number of the insturment. It is safe to assume the sysadmin will know the serial number of the machine during the registration process.
 * A method to decode a passed message [**UNWRITTEN**]
 
 ## Implementation
@@ -74,7 +77,7 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 
 ## OSMO 2020 Serial Command Structure
 
-The theory was, if enough log files were collected and analyzed carefully enough, you could get a good idea of what the command structure was, even without a users manuel. Thus, a **majoiry** of the commands and their respective byte patterns have been found. 
+The theory was, if enough log files were collected and analyzed carefully enough, you could get a good idea of what the command structure was, even without a users manuel. Thus, a **majoiry** of the commands and their respective byte patterns have been found. In the following documentation, the quotation marks denote the start and end of a message. They are not included in the sent message.
 
 ### Recall Results
   * Header : 19 Bytes
@@ -84,8 +87,9 @@ The theory was, if enough log files were collected and analyzed carefully enough
     * Need to come back to this to double check newline characters + spaces
     * 116 Bytes is an estimate from stitching together tests
   * Results : 65 Bytes
-    * `"<space*2>199:  287 mOsm/kg                      09/21/2019 09:36:14 AM\r\n"`
+    * `"<space*2>199:  287 mOsm/kg<space*22>09/21/2019 09:36:14 AM\r\n"`
     * For the record, we know for a fact the results are appended every 65 bytes, we don’t know for sure how often the heading is
+    * TODO: Recount frame, seems to be off by a few bytes
 ### Result Reporting (Doing a real test)
   * Header : 111 Bytes
       * `Operator ID: ___________________
@@ -127,7 +131,56 @@ The theory was, if enough log files were collected and analyzed carefully enough
   * City and State : 20 Bytes
     * `“Norwood, MA  02062\r\n”`
   * Telephone : 31 Bytes
-    
+    * `“Telephone:\r\nUS: (781)320-9000\r\n”`
+  * Fax : 33 Bytes
+    * `“Service Fax:\r\nUS: (781)320-0811\r\n”`
+  * Supplies Fax : 34 Bytes
+    * `“Supplies Fax:\r\nUS: (781)320-3669\r\n”`
+  * Internet : 32
+    * `“Internet:\r\nwww.aicompanies.com\r\n”`
+  * Model / Firmware : 45 Bytes
+    * `“<space*7>Model 2020\r\nFirmware   Version   2.2\r\n”`
+  * Serial Number : 41 Bytes
+    * `“SN: 05030326A\r\nBlock:  5   Sample:  7\r\n”`
+    * The `block` and `sample` feilds here are unknown, espeically because this command is not used with any measurement command
 
+### Minor Commands
+The following are commands are unlikely to be encountered in production enviroment. They result in little/no additional information being sent over serial besides the header.
+#### A/D Tests
+  * Header : 14 Bytes
+    * `“1. A/D Tests\r\n”`
 
-TODO: Finish the remainder of the commands
+#### Probe Bin Test
+  * Header : 19 Bytes
+    * `“2. Probe Bin Test\r\n”`
+
+#### Solenoid Test
+  * Header : 18 Bytes
+    * `“3. Solenoid Test\r\n”`
+
+#### Display/Print Test
+  * Header : 24 Bytes 
+    * `“4. Display/Print Test\r\n”`
+  * Test : 50 Bytes
+    * `“!?<>#$%&*()/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\r\n”`
+
+#### Key/beeper Test
+  * Header : 26 Bytes
+    * `“5. Key/Beeper Test<space*6>\r\n”`
+
+#### Barcode Test
+  * Header : 26 Bytes
+    * `“6. Barcode Test<space*9>\r\n”`
+  
+#### Motor Test
+  * Header : 16 Bytes
+    * `“7. Motor Tests\r\n”`
+
+#### Select LIMS Out
+  * Header : 26 Bytes
+    * `“9. Select LIMS Out<space*6>\r\n”`
+
+#### Exit Configuration (?)
+  * Header : 14 Bytes
+    * `“Saving Setup\r\n”`
+
