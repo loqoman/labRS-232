@@ -178,6 +178,7 @@ class OSMO2020Manager(object):
         # If we receaved the same reading
         if all(parsedBuffer):
             parsedBuffer = parsedBuffer[0]
+            logging.debug("OSMO2020Manager looping with a buffer of: " + str(parsedBuffer))
             # Checking flags
             # ========= FLAG CHECKING =========
             if(self.flags['resultReportingFlag'] = True):
