@@ -71,6 +71,10 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 * ~~A method to block for self-identify (I.E Determine what message was sent based on only the message) [**UNWRITTEN**]~~
   * The self-identify feature was ruled unnessissary after getting a better idea of the commands. There are only ~2 commands that give the serial number of the insturment. It is safe to assume the sysadmin will know the serial number of the machine during the registration process.
 * A method to decode a passed message [**UNWRITTEN**]
+* A stack [**UNWRITTEN**]
+* Flags [**UNWRITTEN**]
+
+
 
 ## Implementation
 
@@ -115,7 +119,7 @@ The theory was, if enough log files were collected and analyzed carefully enough
     * `“Std Dev = 22.5 mOsm/kg\r\n”`
   * Coefficient of variation : 12 Bytes
     * `“CV = 7.39%\r\n”` 
-    * Note: Stitched toegether from two sepearet log messages
+    * Note: Stitched toegether from two separate log messages
 ### Event Record
   * Header : 18 Bytes
     * `"3. Event Record\r\n”`

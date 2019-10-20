@@ -34,8 +34,13 @@ if __name__ == "__main__":
 
     # Let settle
     time.sleep(5)
-    # XXX: No printing of the input buffer size
-    while (True):
+
+    # Starting main loop
+    masterHardwareManager.loop()
+
+'''
+
+        while (True):
         continueStr = raw_input("Ready to take measurement? (Y/N)")
 
         logging.debug("Passed an input of: " + continueStr)
@@ -57,13 +62,6 @@ if __name__ == "__main__":
     logging.info("Units: " + str(testResult.units))
     logging.info("Well: " + str(testResult.well))
     logging.info("ID: " + str(testResult.ID))
-
-
-'''
-Psudo-code for blocking design:
-
-    
-
 
 '''
             

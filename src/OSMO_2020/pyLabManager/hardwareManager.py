@@ -23,7 +23,7 @@ class HardwareManager(object):
         
         # Assigning the single hardwareManager
         if hardwareManager is None:
-            logging.info("Assigning a new global hardwareManager")
+            logging.info("Creating a new global hardwareManager")
             hardwareManager = self
         else:
             logging.warning("Overriding the old hardwareManager")
@@ -106,6 +106,13 @@ class HardwareManager(object):
         self.insturmentManagers.append(insturmentManager)
         
 
-    def assoicateDataForResult(self, result, insturmentManager):
-        # Unwritten
-        pass
+    def loop(self):
+        # ===== Main Loop =====
+        while True:
+            for manager in self.insturmentManagers:
+                manager.identifyMessage()
+                manager.pop()
+
+    
+        
+    
