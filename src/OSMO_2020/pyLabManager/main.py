@@ -6,7 +6,7 @@ import parser
 import time
 import sys
 
-logging.basicConfig(level=logging.INFO,
+logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s %(levelname)-6s: %(message)s",
                     datefmt="%m/%d %H:%M:%S",
                     filename="logs/pyLabLogs.log",
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     masterHardwareManager.registerInsturmentManager(testOsmo)
 
     # Let settle
-    time.sleep(5)
+    time.sleep(2)
 
     # Starting main loop
     masterHardwareManager.loop()

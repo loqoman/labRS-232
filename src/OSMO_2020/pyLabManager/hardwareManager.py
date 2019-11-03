@@ -111,7 +111,7 @@ class HardwareManager(object):
         while True:
             for manager in self.insturmentManagers:
                 manager.identifyMessage()
-                manager.pop()
+                #manager.pop()
 
     
         
