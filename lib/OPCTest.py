@@ -1,4 +1,5 @@
 import OpenOPC
+#   http://openopc.sourceforge.net/api.html
 #  DCOM mode is used to talk directly to OPC servers without the need for the OpenOPC Gateway Service. 
 #   This mode is only available to Windows clients. 
 #   opc = OpenOPC.client()
