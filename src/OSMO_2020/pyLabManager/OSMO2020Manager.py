@@ -271,7 +271,6 @@ class OsmoMessage(object):
         self.timestampPop = None
         # self.sizeBytes
         
-    def spewFacts(self):
         logging.debug("Osmo message with a value of: " + str(self.value))
         logging.debug("Osmo message with a units of: " + self.units)
         logging.debug("Osmo message with a label of: " + self.label)

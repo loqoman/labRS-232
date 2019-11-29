@@ -14,7 +14,7 @@ class myHandler(BaseHTTPRequestHandler):
         self.wfile.write("Hello World !")
         return
         # Handler for the CUSTOM requests
-    def do_CUSTOM(self):
+    def do_ASSINGLABKEY(self):
         # Send a proper HTTP response
         self.send_response(200)
         # https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
@@ -23,6 +23,29 @@ class myHandler(BaseHTTPRequestHandler):
         # Send the message
         self.wfile.write("Custom Message!")
         return
+
+    def do_PUT(self):
+        content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+        post_data = self.rfile.read(content_length) # <--- Gets the data itself
+        print(post_data)
+
+    def do_ASSIGN(self):
+        # Psudocode
+        # RESTFUL, all happens after a request from client
+        '''
+        -1. If there is unsent, linked data send it back 
+        -1a.(GOTO 1)
+
+        0. Check table for unassigned data
+        0a. Send data back with the sample ID if there is unassigned data
+
+        1. Parse the sample ID
+        2. Set a flag linking the sample ID to the next data set
+        <Once data is avaible>
+        3. Store the data w/ ID in 'database'
+        '''
+
+
 
 try:
 	#Create a web server and define the handler to manage the
