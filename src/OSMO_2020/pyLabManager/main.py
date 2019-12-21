@@ -1,10 +1,12 @@
 from hardwareManager import HardwareManager
 from OSMO2020Manager import OSMO2020Manager
-from result import Result
-import logging
-import parser
-import time
-import sys
+from result import Result 
+import parser,time,sys, logging
+# Slight abstraction over the normal http library
+import httpServer 
+
+# Database Imports
+import pickledb
 
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s %(levelname)-6s: %(message)s",
@@ -18,11 +20,22 @@ logging.info("*------* Started main.py *------* ")
 
 # If This exact file is running
 if __name__ == "__main__":
-    # Create the test result
-    # testResult = Result(units = 'milliOsmo', value = None)
-    
+    # Creating Database
+    database = pickledb.load('OsmoDB.db', False)
+    database.dump()
+
+    httpServer.registerDatabase(database)
+    # Create the HTTP Server
+    osmoHTTP = httpServer.labManagerHTTPServer(port=8080,ip='localhost',handler=httpServer.osmoHandler)
+    #osmoHTTP.assignDatabase(database)
+    # Small confusion between begin() and run() in the http server
+    # Spins off a thread that the HTTP server runs in
+    osmoHTTP.begin()
+
     # Create the hardware Manager
     masterHardwareManager = HardwareManager()
+    # TODO: In the future, I think having a specific member variable to keep track of an instument-specific manager would be good
+    masterHardwareManager.registerDatabase(database)
 
     # Create the Osmo2020 Manager
     testOsmo = OSMO2020Manager(port = "/dev/ttyUSB0",
@@ -38,30 +51,3 @@ if __name__ == "__main__":
     # Starting main loop
     masterHardwareManager.loop()
 
-'''
-
-        while (True):
-        continueStr = raw_input("Ready to take measurement? (Y/N)")
-
-        logging.debug("Passed an input of: " + continueStr)
-        if continueStr == 'Y':
-            # Get out of the loop
-            break
-
-        elif continueStr == 'N':
-            logging.notice("Exiting...")
-            # Break out of full method
-            break
-        else:
-            logging.info("Unrecgognised Input, Please type 'Y' or 'N'")
-
-    testResult = testOsmo.parseResultReportData()
-
-    logging.info("Printing some facts about the result object returned")
-    logging.info("Value: " + str(testResult.value))
-    logging.info("Units: " + str(testResult.units))
-    logging.info("Well: " + str(testResult.well))
-    logging.info("ID: " + str(testResult.ID))
-
-'''
-            

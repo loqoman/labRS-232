@@ -6196,3 +6196,15 @@
 10/20 11:39:38 DEBUG : Osmo message with a units of: mOsm/kg
 10/20 11:39:38 DEBUG : Osmo message with a label of: Result Report (Real Test)
 10/20 11:39:38 DEBUG : Osmo message with a timestamp stack of 2019-10-20 11:36:30.260938
+12/21 14:33:09 INFO  : *------* Started main.py *------* 
+12/21 14:37:06 INFO  : *------* Started main.py *------* 
+12/21 14:41:29 INFO  : *------* Started main.py *------* 
+12/21 14:41:42 INFO  : *------* Started main.py *------* 
+12/21 14:41:43 INFO  : *------* Started main.py *------* 
+12/21 14:45:28 INFO  : *------* Started main.py *------* 
+12/21 14:47:06 INFO  : *------* Started main.py *------* 
+12/21 14:47:11 INFO  : *------* Started main.py *------* 
+12/21 14:53:07 INFO  : *------* Started main.py *------* 
+12/21 14:53:07 INFO  : Creating a new global hardwareManager
+12/21 14:54:40 INFO  : *------* Started main.py *------* 
+12/21 14:54:40 INFO  : Creating a new global hardwareManager

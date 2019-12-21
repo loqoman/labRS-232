@@ -80,6 +80,9 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 
 ### **`main.py`**
 
+### **The Database**
+
+* <Insert Text Here>
 ## OSMO 2020 Serial Command Structure
 
 The theory was, if enough log files were collected and analyzed carefully enough, you could get a good idea of what the command structure was, even without a users manuel. Thus, a **majoiry** of the commands and their respective byte patterns have been found. In the following documentation, the quotation marks denote the start and end of a message. They are not included in the sent message.

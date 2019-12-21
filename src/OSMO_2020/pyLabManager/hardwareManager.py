@@ -20,6 +20,9 @@ class HardwareManager(object):
         # For now, these lists are strings.
         self.knownSerialNumbers = []
         self.knownModels = []
+
+        # Init empty database
+        self.database = None
         
         # Assigning the single hardwareManager
         if hardwareManager is None:
@@ -35,7 +38,7 @@ class HardwareManager(object):
         returnedList = []
 
         # TODO: model input checking
-        for insturment in insturmentManagers:
+        for insturment in self.insturmentManagers:
             if insturment.model == model:
                 returnedList.append(insturment)
 
@@ -44,9 +47,14 @@ class HardwareManager(object):
     def listInsturmentsBySN(self, SN = ''):
         returnedList = []
 
-        for insturment in insturmentManagers:
+        for insturment in self.insturmentManagers:
             if insturment.SN == SN:
                 returnedList.append(insturment)
+
+    def registerDatabase(self, database):
+        # Acceps a passed database
+        # On register on an insturmentManager, assigns the database to that insturment manager
+        self.database = database
 
     # Returns bool representing the success of the register
     def registerInsturmentManager(self, insturmentManager):
@@ -71,7 +79,7 @@ class HardwareManager(object):
                     break
 
                 elif continueStr == 'N':
-                    logging.notice("Exiting register method")
+                    logging.info("Exiting register method")
                     # Break out of full method
                     return False
                 else:
@@ -93,7 +101,7 @@ class HardwareManager(object):
                     break
 
                 elif continueStr == 'N':
-                    logging.notice("Exiting register method")
+                    logging.info("Exiting register method")
                     # Break out of full method
                     return False
                 else:
@@ -103,6 +111,10 @@ class HardwareManager(object):
             self.knownSerialNumbers.append(insturmentSN)
 
         # Appending the object
+        # XXX: Come back and double-check this later, should be fine for now
+        if (self.database is not None):
+            insturmentManager.assignDatabase(self.database)
+            
         self.insturmentManagers.append(insturmentManager)
         
 
