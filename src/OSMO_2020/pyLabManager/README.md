@@ -15,34 +15,7 @@ labManager is an independent, open-source scalabale lab managment software, buil
     * ~~Recall Results~~
     * ~~Report Results~~
 
-## Documentation
-
-### **`result.py`**
-
-Description 
-
-- This file outlines the Result object. Results bridge the hardware manager to a human-friendly medium. Results are created by request through Ignition. On creatation a sample ID is assoiced with the object, a data condition is set, desired insturment is specified. (Nb: Each individual insturment has a unique serial number. If needed, the serial can be assoiced with a human-friendly designation, for example, OSMO 1 or OSMO 2.)
-
-- Results are designed to be customizible, with the assumtion that in practice multiple lab insturments of the same model will be active, and the same `result` object will be useable for the output of every instuement.
-
-Paramaters / Varibles assoicated with a `result` object
-* Sample ID (In the format S-2019MM/DD[?])
-* Units 
-* Value (realtive to the units)
-* Timestamp of request
-* Coprresponding Insturment (OSMO vs. YSI)
-* Insturment SN (Nb: In the future 'Coprresponding Insturment' and 'Instrument SN' could be combined)
-* Have a default value in case of error [**UNWRITTEN**] 
-
-
-- Recieveing data is (arguibly) the hardest thing to design in `result.py`. There are many different theoretical methods for how/when a user would want data received, and it is nessissary to design a system that prepaired for all of them.
-
-Methods For Receiving Data
-* Wait until a time [**UNWRITTEN**]
-* Assume it is in input buffer, and read it directly [**UNWRITTEN**]
-* Wait until the input buffer is the proper size, then read it out [**UNWRITTEN**]
-
-
+# Documentation
 
 ### **`hardwareManager.py`**
 
@@ -70,19 +43,52 @@ Methods / Varibles assoiaced with the OSMO2020 Manager:
 * A method to block for N bytes of data
 * ~~A method to block for self-identify (I.E Determine what message was sent based on only the message) [**UNWRITTEN**]~~
   * The self-identify feature was ruled unnessissary after getting a better idea of the commands. There are only ~2 commands that give the serial number of the insturment. It is safe to assume the sysadmin will know the serial number of the machine during the registration process.
-* A method to decode a passed message [**UNWRITTEN**]
-* A stack [**UNWRITTEN**]
-* Flags [**UNWRITTEN**]
+* ~~A method to decode a passed message [**UNWRITTEN**]~~
+* A First-In-First-Out Stack 
+* Flags to represent the current state of the insturment
 
-
-
-## Implementation
 
 ### **`main.py`**
 
-### **The Database**
+Description
 
-* <Insert Text Here>
+* `Main` represents the launch point for pyLabManager. Nothing in `main` is ment to be hardcoded. Main initalizes the database, logging module, hardware manager, all insturment managers, and the HTTP server. It is also responsible for feeding certain objects down the hireacry. For instance, while the database object is created in `main`, it is handed down to the hardware manager, and by extension any instumrment managers.
+
+Items that are _indended_ to be created in main
+* Any needed databases 
+* The HTTP server object
+* The master hardware manager
+  * Note: Registering all the insturment managers is indenteded to happen in main
+* Individual Instument Managers
+* Logging module init and configuration
+
+Planned Functionality
+* Move some of the configuration into an argument parser
+* Loading insturment data / database configruations from a config file
+
+### **Database**
+
+Description
+
+* pyLabManager certainly didn't invent the concept of a non-volitile database, however it is an essential component of the software. The current database implementation serves multiple functions. It acts as a debugging device, records keeper, and transfering data between modules. The database library used is `pickleDB`, which is a lightweight JSON based library. Documentation for pickledb can be found [here](https://pythonhosted.org/pickleDB/commands.html)
+
+* At a high level, there are three key'd lists in the database that are nessissary for the function of one insturment. In the case of the OSMO2020, there are `osmoUnpairedSampleID`, `osmoUnpairedTimestamp`, and `OsmoUnsentLinkedData`. These three lists hold keys that represent the states of various database entrys.
+
+### **`httpServer.py`**
+
+Description
+
+* The HTTP server represents the module that has contact with the outside world. The httpServer file contains a handler and a threaded python 2.7 `BaseHTTPServer` object. The server is designed such that the handler is to be expanded for each insturment. The OSMO2020 handler is described below.
+
+OSMO2020 HTTP Command Structure
+
+* The OSMO2020 HTTP Command has to account for 3 different states:
+  * There is linked, unsent data
+  * There is unlinked, unsent, ready data
+  * There is no data ready to be sent
+* The exact protocol executed for each statement can be found by looking at the code, however the HTTP protocol aheances are important. The OSMO command sends two flags: One 'Content-Type' of 'text' and one 'Status' which depends on which of the cases were executed. Additionally, the client is returned a formatted string with the sample ID results, and the well number with corresponding measurement.
+
+
 ## OSMO 2020 Serial Command Structure
 
 The theory was, if enough log files were collected and analyzed carefully enough, you could get a good idea of what the command structure was, even without a users manuel. Thus, a **majoiry** of the commands and their respective byte patterns have been found. In the following documentation, the quotation marks denote the start and end of a message. They are not included in the sent message.

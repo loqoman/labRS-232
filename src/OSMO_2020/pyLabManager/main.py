@@ -26,9 +26,7 @@ if __name__ == "__main__":
 
     httpServer.registerDatabase(database)
     # Create the HTTP Server
-    osmoHTTP = httpServer.labManagerHTTPServer(port=8080,ip='localhost',handler=httpServer.osmoHandler)
-    #osmoHTTP.assignDatabase(database)
-    # Small confusion between begin() and run() in the http server
+    osmoHTTP = httpServer.labManagerHTTPServer(port=8080,ip='localhost',handler=httpServer.insturmentHandler)
     # Spins off a thread that the HTTP server runs in
     osmoHTTP.begin()
 

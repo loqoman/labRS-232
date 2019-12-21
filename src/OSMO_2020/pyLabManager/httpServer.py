@@ -12,7 +12,7 @@ def registerDatabase(Database):
     global globalDatabase
     globalDatabase = Database
 
-class osmoHandler(BaseHTTPRequestHandler):
+class insturmentHandler(BaseHTTPRequestHandler):
 	
 
     def do_GETDIAGNOSTICS(self):
@@ -22,18 +22,6 @@ class osmoHandler(BaseHTTPRequestHandler):
     def do_OSMO2020COMMAND(self):
         # Psudocode
         logging.debug("Recieved an OSMO 2020 command from a client, prepairing data...")
-        '''
-        -1. If there is unsent, linked data send it back 
-        -1a.(GOTO 1)
-
-        0. Check table for unassigned data
-        0a. Send data back with the sample ID if there is unassigned data
-
-        1. Parse the sample ID
-        2. Set a flag linking the sample ID to the next data set
-        <Once data is avaible>
-        3. Store the data w/ ID in 'Database'
-        '''
 
         # TODO: What is the terminology of this *specific* http request part 
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
