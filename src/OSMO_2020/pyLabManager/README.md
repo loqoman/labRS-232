@@ -8,7 +8,7 @@ labManager is an independent, open-source scalabale lab managment software, buil
 
 * *Operator ID* - Lab insturments post a value labeled 'Operator ID' when communicating a result or recalling result. There is a potential this field can be used to further improve automation.
 * *Two-Way Communication* - Unfortunatly, all communication between the OSMO 2020 is currently one way. A user initilizes the sample, then software handles the reception of the data. In multiple intrument manuals, there is mention of two-way communication, however this functionality has not been tested.
-* *Threading Data Flow* - As the niche of this software beccomes further enumerated, the potential need for threading arises, and could potentially be explored as another avenue. It is unclear weather or not threading is nessissary at this time.
+* ~~*Threading Data Flow* - As the niche of this software beccomes further enumerated, the potential need for threading arises, and could potentially be explored as another avenue. It is unclear weather or not threading is nessissary at this time.~~
 * ~~*Enumerating OSMO Communcation Cases* - Not all possible messages have been recorded and identified for the OSMO 2020. Thus, there are many holes in `OSMO2020Manager.py`, corresponding to the unknowns.~~
     * ~~Power on~~
     * ~~Save configuration~~
