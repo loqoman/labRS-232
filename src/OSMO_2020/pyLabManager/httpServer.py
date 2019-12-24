@@ -21,7 +21,7 @@ class insturmentHandler(BaseHTTPRequestHandler):
 
     def do_OSMO2020COMMAND(self):
         # Psudocode
-        logging.debug("Recieved an OSMO 2020 command from a client, prepairing data...")
+        logging.debug("HTTP Server Recieved an OSMO 2020 command from a client, prepairing data...")
 
         # TODO: What is the terminology of this *specific* http request part 
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
@@ -77,6 +77,8 @@ class insturmentHandler(BaseHTTPRequestHandler):
             for key in keysToMove:
                 globalDatabase.dadd(sampleID, (key,valuesToMove[index]))
                 index += 1
+            # Remove the unpaired timestamp entry from the database
+            globalDatabase.drem(timestampDict)
 
             # Write
             globalDatabase.dump()
@@ -87,7 +89,7 @@ class insturmentHandler(BaseHTTPRequestHandler):
             for key in sampleIDKeys:
                 if 'Well#' in key:
                     returnString += key + ': '
-                    returnString += globalDatabase.dget(sampleID, key)
+                    returnString += str(globalDatabase.dget(sampleID, key))
                     returnString += '  |  '
 
         # elif for robustness
@@ -102,7 +104,7 @@ class insturmentHandler(BaseHTTPRequestHandler):
             # TODO: needs to be double checked
             returnString = 'Waiting on the following sample IDs to be paired: '
 
-            returnString += globalDatabase.lgetall('OsmoUnpairedSampleID')
+            returnString += str(globalDatabase.lgetall('OsmoUnpairedSampleID'))
 
         self.send_response(200)
         # Standard HTTP patterns 
