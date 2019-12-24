@@ -21,7 +21,7 @@ logging.info("*------* Started main.py *------* ")
 # If This exact file is running
 if __name__ == "__main__":
     # Creating Database
-    database = pickledb.load('OsmoDB.db', False)
+    database = pickledb.load('OsmoDB.json', False)
     database.dump()
 
     httpServer.registerDatabase(database)
