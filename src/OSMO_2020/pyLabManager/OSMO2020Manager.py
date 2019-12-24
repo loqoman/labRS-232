@@ -56,8 +56,10 @@ class OSMO2020Manager(object):
         # Accepts a database for to use with this instument
         self.database = database
 
+        # XXX: Need to check to see if these tables have already been created
         # XXX: Are the changes being made to the database here showing up in other places?
-        # Create OSMO specific database litss
+
+        # ----- Create OSMO key'd lists ----- #
         # Represents all the experiments that came from the OSMO manager that are unpaired
         self.database.lcreate('OsmoUnpairedTimestamp')
         # Represents all the keys that are sent from the HTTP Server
@@ -65,6 +67,10 @@ class OSMO2020Manager(object):
         # Self explanitory, but *can* happen
         # Will be filled with sampleID's
         self.database.lcreate('OsmoUnsentLinkedData')
+
+        self.database.dump()
+
+        logging.debug("OSMO Manager Initilized database")
 
 
     def parseRecallData(self):
@@ -182,6 +188,7 @@ class OSMO2020Manager(object):
 
         # Adding the message to the stack
         self.stack.append(OsmoMessage(measurementsByWell,"mOsm/kg", "Result Report (Real Test)"))
+        logging.debug("OSMO Manager finished parsing a 'Result Report' test and added it to the stack")
 
         # TODO: Rename this varible
         self.readings = {}
@@ -207,7 +214,7 @@ class OSMO2020Manager(object):
             time.sleep(.25)
 
         # If we receaved the same reading
-        logging.debug("Received a rolling average of: " + str(parsedBufferRollingAverage))
+        # logging.debug("Received a rolling average of: " + str(parsedBufferRollingAverage))
         if all(parsedBufferRollingAverage):
             parsedBuffer = parsedBufferRollingAverage[0]
             logging.debug("OSMO2020Manager looping with a buffer of: " + str(parsedBuffer))
@@ -227,7 +234,7 @@ class OSMO2020Manager(object):
             if(parsedBuffer == 19):
                 # Recall Results or Probe bin tests
                 # XXX: ASSUMING IT IS RECALL RESULTS FOR THE PURPOSES OF TESTING
-                1
+                
                 pass
             if(parsedBuffer == 111):
                 # Result Reporting
@@ -268,18 +275,19 @@ class OSMO2020Manager(object):
             elif(parsedBuffer == 14):
                 # Exiting configuration
                 pass
-        if (self.stack != []):
-            logging.debug("Printing the stack..." + str(self.stack))
-            for a in self.stack:
-                a.spewFacts()
 
     def pop(self):
         # Is there an unpaired sample ID in the database
         # Yes: Pair the new data with the unpaired sample ID in the database
         # No:  Put an unpaired timestemp(representing unpaired data) in the database
-        # XXX: (Assuming threading is putn into the HTTP Server) 
+        # XXX: (Assuming threading is put into the HTTP Server) 
         #       There is an unlikely chance that both the HTTP server and the manager write into the database at the same time
-        
+
+        if (self.stack == []):
+            return
+
+        logging.debug("OSMO has entered pop() method")
+
         # Hopefully this won't be confusing, removes and returns the first item in the manager's stack
         popedMessage = self.stack.pop(0)
         # The list representing the unpaired sample ID's is a FIFO stacktimestampPop
@@ -291,14 +299,14 @@ class OSMO2020Manager(object):
 
             self.database.dcreate(sampleID)
             self.database.dadd(sampleID, ('units',popedMessage.units))
-            self.database.dadd(sampleID, ('label',popedMessage.labl))
+            self.database.dadd(sampleID, ('label',popedMessage.label))
             # Unlikely the above two value will ever be referenced, but might help for diagnostics
             self.database.dadd(sampleID, ('timestampPop',datetime.datetime.now()))
             self.database.dadd(sampleID, ('timestampStack', popedMessage.timestampStack))
             
             for wellPair in popedMessage.value:
                 # Should be a pair of (well,value)
-                self.database.dadd(sampleID, ("Well#" + wellPair['well'], wellPair['measurement']))
+                self.database.dadd(sampleID, ("Well#" + str(wellPair['well']), wellPair['measurement']))
 
             self.database.ladd('OsmoUnsentLinkedData', sampleID)
             # Write
@@ -314,14 +322,14 @@ class OSMO2020Manager(object):
             self.database.dcreate(timestamp)
             # Unlikely the above two value will ever be referenced, but might help for diagnostics
             self.database.dadd(timestamp, ('units',popedMessage.units))
-            self.database.dadd(timestamp, ('label',popedMessage.labl))
+            self.database.dadd(timestamp, ('label',popedMessage.label))
 
-            self.database.dadd(timestamp, ('timestampPop',datetime.datetime.now()))
+            self.database.dadd(timestamp, ('timestampPop',str(datetime.datetime.now())))
             self.database.dadd(timestamp, ('timestampStack', popedMessage.timestampStack))
             
             for wellPair in popedMessage.value:
                 # Should be a pair of (well,value)
-                self.database.dadd(timestamp, ("Well#" + wellPair['well'], wellPair['measurement']))
+                self.database.dadd(timestamp, ("Well#" + str(wellPair['well']), wellPair['measurement']))
 
             # Write
             self.database.dump()
