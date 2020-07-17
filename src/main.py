@@ -1,6 +1,5 @@
 from hardwareManager import HardwareManager
 from OSMO2020Manager import OSMO2020Manager
-from result import Result 
 import parser,time,sys, logging
 # Slight abstraction over the normal http library
 import httpServer 

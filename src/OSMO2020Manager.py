@@ -7,7 +7,6 @@ import time
 import datetime
 
 import pickledb
-import result
 
 # This is a trimmed down version of a basic Instument manager
 # Nb: timeout for Serial object only affects the behaivor read()
