@@ -5,3 +5,5 @@
 *.json
 # vscode tends to generate garbage
 /.vscode
+# logs don't need to be transfered
+*.log
