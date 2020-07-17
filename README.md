@@ -15,7 +15,7 @@ labManager is an independent, open-source scalabale lab managment software, buil
     * ~~Recall Results~~
     * ~~Report Results~~
 
-# Documentation
+## Documentation
 
 ### **`hardwareManager.py`**
 
@@ -88,6 +88,9 @@ OSMO2020 HTTP Command Structure
   * There is no data ready to be sent
 * The exact protocol executed for each statement can be found by looking at the code, however the HTTP protocol aheances are important. The OSMO command sends two flags: One 'Content-Type' of 'text' and one 'Status' which depends on which of the cases were executed. Additionally, the client is returned a formatted string with the sample ID results, and the well number with corresponding measurement.
 
+### **Setup**
+
+* pyLabManager is almost entirely based on python-standard libraries, the only outside dependencies are `pickledb` and `serial`, not being packaged with a python2 standard distribution. These packages can be installed by using the `pip` utility, with the command `pip install -r requirements.txt`.
 
 ## OSMO 2020 Serial Command Structure
 
