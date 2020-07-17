@@ -1,0 +1,2 @@
+serial==0.0.97
+pickledb==0.9.2
