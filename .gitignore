@@ -3,3 +3,5 @@
 # Database files are application-specific
 *.db
 *.json
+# vscode tends to generate garbage
+/.vscode
